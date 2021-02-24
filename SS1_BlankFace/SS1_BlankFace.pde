@@ -177,8 +177,3 @@ void draw(){
   noStroke();
   arc(540, 430, 120, 80, PI, TWO_PI); // hat
 }
-
-void mousePressed() {
-  eyesHeight = eyesHeight + 3;
-  eyesWidth = eyesWidth + 3;
-}
