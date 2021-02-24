@@ -23,7 +23,7 @@ void draw(){
   fill(0, 0, 0);
   stroke(255, 255, 255);
   strokeWeight(4);
-  ellipse(570, 170, 20, eyesHeight); // R eye
+  ellipse(570, 170, eyesWidth, eyesHeight); // R eye
   
   fill(0, 0, 0);
   noStroke();
@@ -42,12 +42,12 @@ void draw(){
   fill(0, 0, 0);
   stroke(247, 27, 27);
   strokeWeight(4);
-  ellipse(205, 170, 20, 20); // L eye
+  ellipse(205, 170, eyesWidth, eyesHeight); // L eye
   
   fill(0, 0, 0);
   stroke(247, 27, 27);
   strokeWeight(4);
-  ellipse(270, 170, 20, 20); // R eye
+  ellipse(270, 170, eyesWidth, eyesHeight); // R eye
   
   fill(0, 0, 0);
   noStroke();
@@ -66,12 +66,12 @@ void draw(){
   fill(0, 0, 0);
   stroke(94, 255, 41);
   strokeWeight(4);
-  ellipse(805, 170, 20, 20); // L eye
+  ellipse(805, 170, eyesWidth, eyesHeight); // L eye
   
   fill(0, 0, 0);
   stroke(94, 255, 41);
   strokeWeight(4);
-  ellipse(870, 170, 20, 20); // R eye
+  ellipse(870, 170, eyesWidth, eyesHeight); // R eye
   
   fill(0, 0, 0);
   noStroke();
@@ -90,12 +90,12 @@ void draw(){
   fill(0, 0, 0);
   stroke(94, 255, 41);
   strokeWeight(4);
-  ellipse(805, 470, eyesWidth, 20); // L eye
+  ellipse(805, 470, eyesWidth, eyesHeight); // L eye
   
   fill(0, 0, 0);
   stroke(94, 255, 41);
   strokeWeight(4);
-  ellipse(870, 470, eyesWidth, 20); // R eye
+  ellipse(870, 470, eyesWidth, eyesHeight); // R eye
   
   fill(0, 0, 0);
   noStroke();
