@@ -1,22 +1,26 @@
-String[] princess = {"mulan.png", "tiana.jpg", "jasmine", "belle"};
+String[] princesses = {"mulan.png", "tiana.jpg", "jasmine.jpg", "belle.jpg"};
 
-int rectX = 0;
-int rectY = height/2;
+int imgX = 0;
+int imgY = height/2;
+int i = 0;
+princess = loadImage(princesses[i]);
+
+int size = 600;
 
 void setup () {
-  background(600, 600);
+  background(size, size);
 }
 
-void draw () {
-  rect(rectX, rectY, 256, 256);
+void draw () {  
+  image(princess, imgX, imgY);
   
-  while () {
-    
-    photoChange();
-  
+  if (imgX <= size) {
+    imgX++;
+  } else {
+    imgX--;
   }
   
-  
+  //photoChange();
 }
 
 void photoChange () {
