@@ -2,9 +2,10 @@
 // Instructions: Move your mouse to watch the circles change colors in random
 // Click + Drag your mouse or pause to stop the color changes
 
-int R = (int)random(0, 255);
-int G = (int)random(0, 255);
-int B = (int)random(0, 255);
+int R = (int)random(130, 255);
+int G = (int)random(130, 255);
+int B = (int)random(130, 255);
+
 void setup () {
   size(500, 500);
 }
@@ -19,6 +20,7 @@ void draw () {
   stroke(R, G, B);
   strokeWeight(15);
   line(mouseX - 10, mouseY, mouseX - 10, mouseY);
+
 }
 
 void mouseMoved () { // changes colors of circles every mouse movement
@@ -47,4 +49,10 @@ void circleParty () {
 void mouseDragged () {
     fill(R, G, B);
     ellipse(mouseX - 10, mouseY, 5, 5);
+    
+    if (mouseX > 475 || mouseX < 25) {
+      R = (int)random(130, 255);
+      G = (int)random(130, 255);
+      B = (int)random(130, 255);
+    }
 }
