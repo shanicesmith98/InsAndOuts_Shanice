@@ -1,15 +1,18 @@
 // Shanice Smith, Circles Game
-// Instructions: Stay within the bounds of the sketch as long as possible you draw the given Animal or Object
+// Instructions: Stay within the bounds of the sketch as long as possible
+// as you draw the given random Animal or Object
 
 // TODOS:
-// 1. game funtionality - stay within bounds
-// 2. add timer
+// 1. game funtionality - stay within bounds and drawing with mouse
+// 2. fix timer (rounding + resetting to 0 at restart)
 // 3. add sound
 // 4. add game over state when out of bounds
 // 5. styling
 
 String state = "start";
-String[] drawIdeas = {"Bird", "Dog", "Vase", "Bird"};
+String[] drawIdeas = {"Bird", "Dog", "Vase", "Bird", "Flowers"};
+int i = (int)random(0, 5);
+String randIdea;
 
 int timer = 0;
 float currentTime = 0;
@@ -20,6 +23,7 @@ int B = (int)random(130, 255);
 
 void setup () {
   size(500, 500);
+  
   textAlign(CENTER);
   textSize(24);
 }
@@ -28,6 +32,7 @@ void draw () {
   if (state == "start") {
     timer = 0;
     currentTime = 0;
+    randIdea = drawIdeas[i];
     
     background(191, 141, 247);
     fill(255);
@@ -43,6 +48,7 @@ void draw () {
     background(255);
     fill(0);
     text("Time Played: " + currentTime, width/2, 30);
+    text("Challenge: " + randIdea, width/2, 60);
     
     // func call
     circleParty();
@@ -60,8 +66,6 @@ void draw () {
     text("You played for: " + currentTime + " seconds.", width/2, height/2 + 30);
     text("Press 1 to try again.", width/2, height/2 + 200);
   }
-  
-
 }
 
 void mouseMoved () { // changes colors of circles every mouse movement
