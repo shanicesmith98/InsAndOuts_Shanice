@@ -4,9 +4,7 @@
 // TODOS:
 // 1. game funtionality - fix background when drawing with mouse
 // 2. fix timer (rounding + resetting to 0 at restart)
-// 3. add sound
-// 4. add game over state when out of bounds
-// 5. styling
+// 2. styling
 
 String state = "start";
 String[] drawIdeas = {"Bird", "Dog", "Vase", "Bird", "Flowers"};
