@@ -1,9 +1,8 @@
 // Shanice Smith, Circles Game
-// Instructions: Stay within the bounds of the sketch as long as possible
-// as you draw the given random Animal or Object
+// Instructions: Draw the given random Animal or Object within the given time
 
 // TODOS:
-// 1. game funtionality - stay within bounds and drawing with mouse
+// 1. game funtionality - fix background when drawing with mouse
 // 2. fix timer (rounding + resetting to 0 at restart)
 // 3. add sound
 // 4. add game over state when out of bounds
@@ -14,8 +13,8 @@ String[] drawIdeas = {"Bird", "Dog", "Vase", "Bird", "Flowers"};
 int i = (int)random(0, 5);
 String randIdea;
 
-int timer = 0;
-float currentTime = 0;
+int timer;
+float currentTime;
 
 int R = (int)random(130, 255);
 int G = (int)random(130, 255);
@@ -57,21 +56,19 @@ void draw () {
     stroke(R, G, B);
     strokeWeight(15);
     line(mouseX - 10, mouseY, mouseX - 10, mouseY);
+    
+    if (currentTime == 10.0) {
+    state = "game over";
+  }
   }
   
   if (state == "game over") {
     background(141, 201, 247);
     fill(255);
-    text("Oh no! You stepped out of bounds.", width/2, height/2);
+    text("Oh no! You ran out of time.", width/2, height/2);
     text("You played for: " + currentTime + " seconds.", width/2, height/2 + 30);
     text("Press 1 to try again.", width/2, height/2 + 200);
   }
-}
-
-void mouseMoved () { // changes colors of circles every mouse movement
-  R = (int)random(130, 255);
-  G = (int)random(130, 255);
-  B = (int)random(130, 255);
 }
 
 void circleParty () {
@@ -92,6 +89,7 @@ void circleParty () {
 }
 
 void mouseDragged () {
+
     fill(R, G, B);
     ellipse(mouseX - 10, mouseY, 5, 5);
     
@@ -105,9 +103,6 @@ void mouseDragged () {
 void keyPressed () {
   if (key == '2') {
     state = "play";
-  }
-  if (key == '3') {
-    state = "game over";
   }
   if (key == '1') {
     state = "start";
