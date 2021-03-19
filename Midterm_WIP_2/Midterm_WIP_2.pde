@@ -1,18 +1,18 @@
-// Shanice Smith, Circles Game
+// Shanice Smith, Drawing Game
 // Instructions: Draw the given random Animal or Object within the given time
 
 // TODOS:
 // 1. game funtionality - fix background when drawing with mouse
-// 2. fix timer (rounding + resetting to 0 at restart)
-// 2. styling
+// 2. fix timer (float -> int + resetting to 0 at restart)
+// 3. text styling
 
 String state = "start";
 String[] drawIdeas = {"Bird", "Dog", "Vase", "Bird", "Flowers"};
 int i = (int)random(0, 5);
 String randIdea;
 
-int timer;
-float currentTime;
+int timer = 0;
+float currentTime = 0;
 
 int R = (int)random(130, 255);
 int G = (int)random(130, 255);
@@ -33,8 +33,8 @@ void draw () {
     
     background(191, 141, 247);
     fill(255);
-    text("Circles Game", width/2, height/2);
-    text("See how long you can stay within the bounds using your mouse.", 120, 260, width/2, height/2 + 30);
+    text("Drawing Game", width/2, height/2 - 100);
+    text("Draw the challenge object using your mouse.", 120, 200, width/2, height/2);
     text("Press 2 to start the game.", width/2, height/2 + 200);
   }
   
@@ -47,17 +47,15 @@ void draw () {
     text("Time Played: " + currentTime, width/2, 30);
     text("Challenge: " + randIdea, width/2, 60);
     
-    // func call
     circleParty();
     
-    // line info
     stroke(R, G, B);
     strokeWeight(15);
     line(mouseX - 10, mouseY, mouseX - 10, mouseY);
     
     if (currentTime == 10.0) {
-    state = "game over";
-  }
+      state = "game over";
+    }
   }
   
   if (state == "game over") {
