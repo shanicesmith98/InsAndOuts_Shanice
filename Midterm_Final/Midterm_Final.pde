@@ -73,6 +73,7 @@ void startState () {
     text("Drawing Game", width/2, height/2 - 100);
     text("Draw the challenge object using your mouse.", 120, 200, width/2, height/2);
     text("Press 2 to start the game.", width/2, height/2 + 200);
+    text("Press 3 when finished with sketch.", width/2, height/2 + 230);
 }
 
 void playState () {
@@ -117,7 +118,7 @@ void gameOverState () {
     fill(255);
     text("Oh no, time ran out!", width/2, height/2);
     text("Did you finish the challenge?", width/2, height/2 + 30);
-    text("Press 1 to try again.", width/2, height/2 + 200);
+    text("Press 1 to try again for a free draw.", width/2, height/2 + 200);
     
     limit = limit + 10;
 }
@@ -128,8 +129,6 @@ void finishState () {
     text("You finished in the time alloted!", width/2, height/2);
     text("Congrats!!!!", width/2, height/2 + 30);
     text("Press 1 to try again.", width/2, height/2 + 200);
-    
-
 }
 
 void keyPressed () {
