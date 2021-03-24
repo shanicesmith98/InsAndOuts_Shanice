@@ -8,6 +8,8 @@ String randIdea;
 
 int timer = 0;
 int currentTime = 0;
+int timeAdded = 10;
+int limit = 10;
 
 // mouse coords tracking
 int[] pointX = new int[50];
@@ -28,6 +30,7 @@ void setup () {
 }
 
 void draw () {
+  
   if (state == "start") {
     startState();
   }
@@ -38,6 +41,10 @@ void draw () {
   
   if (state == "game over") {
     gameOverState();
+  }
+  
+  if (state == "finish") {
+    finishState();
   }
 }
 
@@ -70,8 +77,8 @@ void startState () {
 
 void playState () {
     timer = millis();
-    currentTime = (int)Math.round(timer * 0.001);
-    if (currentTime == currentTime + 10) {
+    currentTime = (int)Math.round(timer * 0.0005);
+    if (currentTime == limit) {
       state = "game over";
     }
     
@@ -80,37 +87,49 @@ void playState () {
     stroke(R, G, B);
     strokeWeight(10);
     
+    // from array demo
     pointX[counter] = mouseX;
     pointY[counter] = mouseY;
     counter++;
   
-  for(int i=0; i<pointX.length-1; i++){
-    if(i+1 != counter){
-      line(pointX[i], pointY[i], pointX[i+1], pointY[i+1]);
+    for(int i=0; i<pointX.length-1; i++){
+      if(i+1 != counter){
+        line(pointX[i], pointY[i], pointX[i+1], pointY[i+1]);
+      }
     }
-  }
   
-  if (counter != pointX.length){
-    line(pointX[0], pointY[0], pointX[pointX.length-1], pointY[pointX.length-1]);
-  }
+    if (counter != pointX.length){
+      line(pointX[0], pointY[0], pointX[pointX.length-1], pointY[pointX.length-1]);
+    }
+    
+    if (counter > pointX.length-1){
+      counter = 0;
+    }
   
-  
-  if (counter > pointX.length-1){
-    counter = 0;
-  }
-  
-  circleParty();
-  fill(0);
-  text("Time Played: " + currentTime, width/2, 30);
-  text("Challenge: " + randIdea, width/2, 60);
+    circleParty();
+    fill(0);
+    text("Time Played: " + currentTime, width/2, 30);
+    text("Challenge: " + randIdea, width/2, 60);
 }
 
 void gameOverState () {
     background(141, 201, 247);
     fill(255);
     text("Oh no, time ran out!", width/2, height/2);
-    text("You played for: " + currentTime + " seconds.", width/2, height/2 + 30);
+    text("Did you finish the challenge?", width/2, height/2 + 30);
     text("Press 1 to try again.", width/2, height/2 + 200);
+    
+    limit = limit + 10;
+}
+
+void finishState () {
+    background(141, 201, 247);
+    fill(255);
+    text("You finished in the time alloted!", width/2, height/2);
+    text("Congrats!!!!", width/2, height/2 + 30);
+    text("Press 1 to try again.", width/2, height/2 + 200);
+    
+
 }
 
 void keyPressed () {
@@ -119,5 +138,8 @@ void keyPressed () {
   }
   if (key == '1') {
     state = "start";
+  }
+  if (key == '3') {
+    state = "finish";
   }
 }
