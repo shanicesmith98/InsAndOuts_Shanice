@@ -1,11 +1,6 @@
 // Shanice Smith, Drawing Game
 // Instructions: Draw the given random Animal or Object within the given time
 
-// TODOS:
-// 1. game funtionality - fix background when drawing with mouse
-// 2. fix timer (float -> int + resetting to 0 at restart)
-// 3. text styling
-
 String state = "start";
 String[] drawIdeas = {"Bird", "Dog", "Vase", "Bird", "Flowers"};
 int i = (int)random(0, 5);
