@@ -1,5 +1,5 @@
 // Shanice Smith, Drawing Game
-// Instructions: Draw the given random Animal or Object within the given time
+// Instructions: Draw the given Animal or Object using your mouse within the given time
 
 String state = "start";
 String[] drawIdeas = {"Bird", "Dog", "Vase", "Bird", "Flowers"};
@@ -9,6 +9,13 @@ String randIdea;
 int timer = 0;
 int currentTime = 0;
 
+// mouse coords tracking
+int[] pointX = new int[50];
+int[] pointY = new int[50];
+
+int counter = 0;
+
+// for random color generator
 int R = (int)random(130, 255);
 int G = (int)random(130, 255);
 int B = (int)random(130, 255);
@@ -22,29 +29,15 @@ void setup () {
 
 void draw () {
   if (state == "start") {
-    timer = 0;
-    currentTime = 0;
-    randIdea = drawIdeas[i];
-    
-    background(191, 141, 247);
-    fill(255);
-    text("Drawing Game", width/2, height/2 - 100);
-    text("Draw the challenge object using your mouse.", 120, 200, width/2, height/2);
-    text("Press 2 to start the game.", width/2, height/2 + 200);
+    startState();
   }
   
   if (state == "play") {
-    background(255);
     playState();
   }
   
   if (state == "game over") {
-    background(141, 201, 247);
-    fill(255);
-    text("Oh no! You ran out of time.", width/2, height/2);
-    text("You played for: " + currentTime + " seconds.", width/2, height/2 + 30);
-    text("Press 1 to try again.", width/2, height/2 + 200);
-    currentTime -= currentTime;
+    gameOverState();
   }
 }
 
@@ -65,25 +58,59 @@ void circleParty () {
   }
 }
 
+void startState () {
+    randIdea = drawIdeas[i];
+    
+    background(191, 141, 247);
+    fill(255);
+    text("Drawing Game", width/2, height/2 - 100);
+    text("Draw the challenge object using your mouse.", 120, 200, width/2, height/2);
+    text("Press 2 to start the game.", width/2, height/2 + 200);
+}
+
 void playState () {
     timer = millis();
     currentTime = (int)Math.round(timer * 0.001);
-    
-    //background(255);
-    fill(0);
-    text("Time Played: " + currentTime, width/2, 30);
-    text("Challenge: " + randIdea, width/2, 60);
-    
-    circleParty();
-    
-    stroke(R, G, B);
-    strokeWeight(15);
-    line(mouseX - 10, mouseY, mouseX - 10, mouseY);
-    
-    if (currentTime == currentTime + 10.0) {
+    if (currentTime == currentTime + 10) {
       state = "game over";
     }
+    
+    background(255);
+    
+    stroke(R, G, B);
+    strokeWeight(10);
+    
+    pointX[counter] = mouseX;
+    pointY[counter] = mouseY;
+    counter++;
+  
+  for(int i=0; i<pointX.length-1; i++){
+    if(i+1 != counter){
+      line(pointX[i], pointY[i], pointX[i+1], pointY[i+1]);
+    }
+  }
+  
+  if (counter != pointX.length){
+    line(pointX[0], pointY[0], pointX[pointX.length-1], pointY[pointX.length-1]);
+  }
+  
+  
+  if (counter > pointX.length-1){
+    counter = 0;
+  }
+  
+  circleParty();
+  fill(0);
+  text("Time Played: " + currentTime, width/2, 30);
+  text("Challenge: " + randIdea, width/2, 60);
+}
 
+void gameOverState () {
+    background(141, 201, 247);
+    fill(255);
+    text("Oh no, time ran out!", width/2, height/2);
+    text("You played for: " + currentTime + " seconds.", width/2, height/2 + 30);
+    text("Press 1 to try again.", width/2, height/2 + 200);
 }
 
 void keyPressed () {
