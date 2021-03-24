@@ -39,23 +39,8 @@ void draw () {
   }
   
   if (state == "play") {
-    timer = millis();
-    currentTime = (int)Math.round(timer * 0.001);
-    
     background(255);
-    fill(0);
-    //text("Time Played: " + currentTime, width/2, 30);
-    text("Challenge: " + randIdea, width/2, 60);
-    
-    circleParty();
-    
-    stroke(R, G, B);
-    strokeWeight(15);
-    line(mouseX - 10, mouseY, mouseX - 10, mouseY);
-    
-    if (currentTime == currentTime + 10.0) {
-      state = "game over";
-    }
+    playState();
   }
   
   if (state == "game over") {
@@ -64,7 +49,7 @@ void draw () {
     text("Oh no! You ran out of time.", width/2, height/2);
     text("You played for: " + currentTime + " seconds.", width/2, height/2 + 30);
     text("Press 1 to try again.", width/2, height/2 + 200);
-    timer -= currentTime;
+    currentTime -= currentTime;
   }
 }
 
@@ -83,6 +68,27 @@ void circleParty () {
       ellipse(j, i, 50, 50);
     }
   }
+}
+
+void playState () {
+    timer = millis();
+    currentTime = (int)Math.round(timer * 0.001);
+    
+    //background(255);
+    fill(0);
+    text("Time Played: " + currentTime, width/2, 30);
+    text("Challenge: " + randIdea, width/2, 60);
+    
+    circleParty();
+    
+    stroke(R, G, B);
+    strokeWeight(15);
+    line(mouseX - 10, mouseY, mouseX - 10, mouseY);
+    
+    if (currentTime == currentTime + 10.0) {
+      state = "game over";
+    }
+
 }
 
 void keyPressed () {
