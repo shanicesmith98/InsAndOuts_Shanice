@@ -64,6 +64,7 @@ void draw () {
     text("Oh no! You ran out of time.", width/2, height/2);
     text("You played for: " + currentTime + " seconds.", width/2, height/2 + 30);
     text("Press 1 to try again.", width/2, height/2 + 200);
+    
   }
 }
 

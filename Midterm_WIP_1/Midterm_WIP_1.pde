@@ -1,5 +1,5 @@
 // Shanice Smith, Circles Game
-// Instructions: Stay within the bounds of the sketch as you draw the given Animal or Object
+// Instructions: Stay within the bounds of the sketch as long as possible you draw the given Animal or Object
 
 // TODOS:
 // 1. game funtionality - stay within bounds
@@ -9,6 +9,8 @@
 // 5. styling
 
 String state = "start";
+String[] drawIdeas = {"Bird", "Dog", "Vase", "Bird"};
+int currentTime = 0;
 
 int R = (int)random(130, 255);
 int G = (int)random(130, 255);
@@ -25,15 +27,18 @@ void draw () {
     background(191, 141, 247);
     fill(255);
     text("Circles Game", width/2, height/2);
-    text("See how long you can stay within the bounds.", 120, 260, width/2, height/2 + 30);
+    text("See how long you can stay within the bounds using your mouse.", 120, 260, width/2, height/2 + 30);
     text("Press 2 to start the game.", width/2, height/2 + 200);
-
-}
+  }
   
   if (state == "play") {
+    currentTime = millis();
+    
     background(255);
     fill(0);
-    text("Time Played: 0", width/2, 30);
+    text("Time Played: ", width/2, 30);
+    text(currentTime, width/2 + 20, 30);
+    
     // func call
     circleParty();
     
