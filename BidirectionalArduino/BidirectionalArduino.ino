@@ -1,6 +1,3 @@
-// Controls Inputs of push button
-// and outputs of the RGB LED 
-
 const int BUTTON = 2;
 const int RED_PIN = 11; 
 const int GREEN_PIN = 10; 
@@ -17,11 +14,13 @@ void setup() {
   while(!Serial) {
     ; //wait for serial port to connect
   }
+  
   pinMode(BUTTON, INPUT);
-
   pinMode(RED_PIN, OUTPUT);
   pinMode(GREEN_PIN, OUTPUT);
   pinMode(BLUE_PIN, OUTPUT);
+
+  establishContact();
 }
 
 void loop() {
@@ -60,4 +59,11 @@ void loop() {
 
     Serial.write(buttonCount);
   }
+}
+
+void establishContact() {
+  while (Serial.available() <= 0){
+    Serial.print('A');
+    delay(300);  
+  } 
 }
