@@ -41,9 +41,11 @@ void setup () {
 void draw () {
   if (myPort.available() > 0){
     int inByte = myPort.read();
+    println(inByte);
+    println(btnState);
     
     if(firstContact == false){
-      if(inByte == 'A'){
+      if(inByte == 0){
         myPort.clear();
         firstContact = true;
         myPort.write(btnState);

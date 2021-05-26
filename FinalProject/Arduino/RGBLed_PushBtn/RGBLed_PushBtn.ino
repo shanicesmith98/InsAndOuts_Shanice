@@ -1,20 +1,17 @@
-// Controls Inputs of push button
-// and outputs of the RGB LED 
+// Controls Inputs of push button and outputs of the RGB LED
 
-const int BUTTON = 2;
-const int RED_PIN = 11; 
-const int GREEN_PIN = 10; 
-const int BLUE_PIN = 9;
+const int PUSHBUTTON_PIN = 2;
+const int RED_PIN = 9;
+const int GREEN_PIN = 10;
+const int BLUE_PIN = 11;
 
-int buttonState = LOW;
-int lastButtonState = LOW;
 int buttonCount = 0;
 
 int inByte = 0;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(BUTTON, INPUT);
+  pinMode(PUSHBUTTON_PIN, INPUT);
 
   pinMode(RED_PIN, OUTPUT);
   pinMode(GREEN_PIN, OUTPUT);
@@ -22,39 +19,40 @@ void setup() {
 }
 
 void loop() {
-  buttonState = digitalRead(BUTTON);
-  if (buttonState == HIGH && lastButtonState == LOW){
-    buttonCount++;  
-  }
-  else {
-  }
-  lastButtonState = buttonState;
-
-  if (buttonCount > 255){
-    buttonCount = 0;  
-  }
-  delay(10);
-
-  if (Serial.available() > 0){
-    inByte = Serial.read();
-
-    if(inByte == 0) {
-      digitalWrite(RED_PIN, HIGH);
-      digitalWrite(GREEN_PIN, LOW);
-      digitalWrite(BLUE_PIN, LOW);  
-    }
-    if(inByte == 1) {
-      digitalWrite(RED_PIN, LOW);
-      digitalWrite(GREEN_PIN, HIGH);
-      digitalWrite(BLUE_PIN, LOW);  
-    }
-    if(inByte == 2) {
-      digitalWrite(RED_PIN, LOW);
-      digitalWrite(GREEN_PIN, LOW);
-      digitalWrite(BLUE_PIN, HIGH);  
-    }
-    else {}
+  int buttonState;
+  buttonState = digitalRead(PUSHBUTTON_PIN);
+  
+  if (Serial.available() > 0) {
+    buttonCount = Serial.read();
 
     Serial.write(buttonCount);
+  }
+  if (buttonState == LOW) {
+    buttonCount++;
+    delay(150);
+  }
+  
+  else if (buttonCount == LOW) {
+      digitalWrite(RED_PIN, LOW);
+      digitalWrite(GREEN_PIN, LOW);
+      digitalWrite(BLUE_PIN, LOW);
+    }
+   else if (buttonCount == 1) {
+      digitalWrite(RED_PIN, HIGH);
+      digitalWrite(GREEN_PIN, LOW);
+      digitalWrite(BLUE_PIN, LOW);
+    }
+   else if (buttonCount == 2) {
+      digitalWrite(RED_PIN, LOW);
+      digitalWrite(GREEN_PIN, HIGH);
+      digitalWrite(BLUE_PIN, LOW);
+    }
+    else if (buttonCount == 3) {
+      digitalWrite(RED_PIN, LOW);
+      digitalWrite(GREEN_PIN, LOW);
+      digitalWrite(BLUE_PIN, HIGH);
+    }
+  else {
+    buttonCount = 0;
   }
 }
